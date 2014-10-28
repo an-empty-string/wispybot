@@ -2,6 +2,7 @@ from pyirc import irc
 from functools import wraps
 import wispy.plugins
 import importlib
+import shlex
 
 class ConnectionWrapper:
     """
@@ -42,7 +43,7 @@ class ConnectionWrapper:
             else:
                 msg = event.message
                 reply_to = lambda m: conn.say(event.user.nick, m)
-            args = msg.split()
+            args = shlex.split(msg)
             if args[0] != command:
                 return
             args = args[1:]
