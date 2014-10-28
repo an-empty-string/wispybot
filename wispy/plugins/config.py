@@ -1,4 +1,6 @@
 import ast
+import wispy
+import wispy.config
 def get_config_key(conn, key, final=False):
     conf = conn.config
     try:
@@ -40,7 +42,16 @@ def get_config(reply, user, typeargs, args, conn, event):
     except:
         reply("Nonexistent configuration key")
 
+def save_config(reply, user, typeargs, args, conn, event):
+    reply("Saving...")
+    try:
+        wispy.config.save_to_file(conn.config)
+    except:
+        reply("Something bad happened!")
+    reply("Done.")
+
 def register_callbacks(conn):
     conn.register_command("config set", set_config, str, str, send_extra_info=True, permission="admin")
     conn.register_command("config get", get_config, str, send_extra_info=True, permission="admin")
     conn.register_command("config add", add_config, str, str, send_extra_info=True, permission="admin")
+    conn.register_command("config save", save_config, send_extra_info=True, permission="admin")
