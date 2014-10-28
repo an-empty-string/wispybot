@@ -43,10 +43,10 @@ class ConnectionWrapper:
             else:
                 msg = event.message
                 reply_to = lambda m: conn.say(event.user.nick, m)
-            args = shlex.split(msg)
-            if args[0] != command:
+            if not msg.startswith(command):
                 return
-            args = args[1:]
+            msg = msg[len(command):]
+            args = shlex.split(msg)
             try:
                 typeargs = [argtype(args[n]) for n, argtype in enumerate(argtypes)]
             except IndexError:
