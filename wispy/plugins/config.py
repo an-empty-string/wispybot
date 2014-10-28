@@ -18,6 +18,16 @@ def set_config(reply, user, typeargs, args, conn, event):
         reply("Failure!")
     reply("Success!")
 
+def add_config(reply, user, typeargs, args, conn, event):
+    key = typeargs[0].split(".")
+    val = typeargs[1]
+    try:
+        conf = get_config_key(conn, key)
+        conf[key[-1]].append(ast.literal_eval(val))
+    except:
+        reply("Failure!")
+    reply("Success!")
+
 def get_config(reply, user, typeargs, args, conn, event):
     key = typeargs[0].split(".")
     try:
@@ -29,3 +39,4 @@ def get_config(reply, user, typeargs, args, conn, event):
 def register_callbacks(conn):
     conn.register_command("config set", set_config, str, str, send_extra_info=True, permission="admin")
     conn.register_command("config get", get_config, str, send_extra_info=True, permission="admin")
+    conn.register_command("config add", add_config, str, str, send_extra_info=True, permission="admin")
