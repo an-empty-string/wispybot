@@ -2,7 +2,7 @@ import ast
 def get_config_key(conn, key, final=False):
     conf = conn.config
     try:
-        for i in (key if final else key[:-1]:
+        for i in (key if final else key[:-1]):
             conf = conn[i]
     except:
         return {}
