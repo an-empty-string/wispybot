@@ -50,8 +50,17 @@ def save_config(reply, user, typeargs, args, conn, event):
         reply("Something bad happened!")
     reply("Done.")
 
+def reload_config(reply, user, typeargs, args, conn, event):
+    reply("Reloading...")
+    try:
+        conn.config = wispy.config.read_from_file()
+    except:
+        reply("Something bad happened!")
+    reply("Done.")
+
 def register_callbacks(conn):
     conn.register_command("config set", set_config, str, str, send_extra_info=True, permission="admin")
     conn.register_command("config get", get_config, str, send_extra_info=True, permission="admin")
     conn.register_command("config add", add_config, str, str, send_extra_info=True, permission="admin")
     conn.register_command("config save", save_config, send_extra_info=True, permission="admin")
+    conn.register_command("config reload", reload_config, send_extra_info=True, permission="admin")
