@@ -1,11 +1,18 @@
 import ast
+def get_config_key(conn, key, final=False):
+    conf = conn.config
+    try:
+        for i in (key if final else key[:-1]:
+            conf = conn[i]
+    except:
+        return {}
+    return conf
+
 def set_config(reply, user, typeargs, args, conn, event):
     key = typeargs[0].split(".")
     val = typeargs[1]
-    conf = conn.config
     try:
-        for i in key[:-1]:
-            conf = conf[i]
+        conf = get_config_key(conn, key)
         conf[key[-1]] = ast.literal_eval(val)
     except KeyError:
         reply("Failure!")
@@ -13,11 +20,9 @@ def set_config(reply, user, typeargs, args, conn, event):
 
 def get_config(reply, user, typeargs, args, conn, event):
     key = typeargs[0].split(".")
-    conf = conn.config
     try:
-        for i in key[:-1]:
-            conf = conf[i]
-        reply(conf[key[-1]])
+        conf = get_config_key(conn, key, True)
+        reply(conf)
     except:
         reply("Nonexistent configuration key")
 
