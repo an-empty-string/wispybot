@@ -28,9 +28,9 @@ def add_config(reply, user, typeargs, args, conn, event):
     except:
         try:
             conf[key[-1]].append(val)
+            reply("Success!")
         except:
             reply("Failure!")
-        reply("Failure!")
 
 def get_config(reply, user, typeargs, args, conn, event):
     key = typeargs[0].split(".")
