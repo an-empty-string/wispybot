@@ -14,9 +14,9 @@ def set_config(reply, user, typeargs, args, conn, event):
     try:
         conf = get_config_key(conn, key)
         conf[key[-1]] = ast.literal_eval(val)
+        reply("Success!")
     except KeyError:
         reply("Failure!")
-    reply("Success!")
 
 def add_config(reply, user, typeargs, args, conn, event):
     key = typeargs[0].split(".")
@@ -24,9 +24,13 @@ def add_config(reply, user, typeargs, args, conn, event):
     try:
         conf = get_config_key(conn, key)
         conf[key[-1]].append(ast.literal_eval(val))
+        reply("Success!")
     except:
+        try:
+            conf[key[-1]].append(val)
+        except:
+            reply("Failure!")
         reply("Failure!")
-    reply("Success!")
 
 def get_config(reply, user, typeargs, args, conn, event):
     key = typeargs[0].split(".")
