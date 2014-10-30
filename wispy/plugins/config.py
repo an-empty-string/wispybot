@@ -76,6 +76,6 @@ def register_callbacks(conn):
     conn.register_command("config set", set_config, str, str, send_extra_info=True, permission="admin")
     conn.register_command("config get", get_config, str, send_extra_info=True, permission="admin")
     conn.register_command("config add", add_config, str, str, send_extra_info=True, permission="admin")
-    conn.register_command("config remove", add_config, str, str, send_extra_info=True, permission="admin")
+    conn.register_command("config remove", remove_config, str, str, send_extra_info=True, permission="admin")
     conn.register_command("config save", save_config, send_extra_info=True, permission="admin")
     conn.register_command("config reload", reload_config, send_extra_info=True, permission="admin")
