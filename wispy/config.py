@@ -5,7 +5,7 @@ def read_from_file(filename="config.yml"):
     Read Wispy configuration data from a file.
     """
     with open(filename) as f:
-        config = yaml.load(f)
+        config = yaml.safe_load(f)
     return config
 
 def save_to_file(config, filename="config.yml"):
