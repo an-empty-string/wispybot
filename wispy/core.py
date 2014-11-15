@@ -20,8 +20,8 @@ class ConnectionWrapper:
         self.pluginname = pluginname
 
     def __getattr__(self, attr):
-        if thing not in self.__dict__:
-            return conn.__dict__.get(attr, None)
+        if attr not in self.__dict__:
+            return self.conn.__dict__.get(attr, None)
         return self.__dict__[attr]
 
     def register_callback(self, type, func):
