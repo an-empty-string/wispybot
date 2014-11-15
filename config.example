@@ -1,0 +1,19 @@
+channels:
+- '##yourchannel'
+identity:
+    ident: username
+    nickname: nickname
+    password: ''
+    realname: i am a bot
+misc:
+    command_trigger: '@'
+permissions:
+    admin:
+    - unaffiliated/yourbotadmin
+plugins:
+- plugin_management
+- channel_management
+- config
+server:
+    host: chat.freenode.net
+    port: 6667
